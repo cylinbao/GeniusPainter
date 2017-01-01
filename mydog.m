@@ -10,7 +10,7 @@ end
 switch nargin
 	case 1
 		k = 10;
-		sigma1 =  0.5;
+		sigma1 =  0.1;
 		sigma2 = sigma1*k;
 	case 2
 		k = 10;
@@ -27,11 +27,6 @@ h2 = fspecial('gaussian', hsize, sigma2);
 gauss1 = imfilter(grayImg,h1,'replicate');
 gauss2 = imfilter(grayImg,h2,'replicate');
 
-dogImg = im2double(gauss1 - gauss2);
+dogImg = gauss1 - gauss2;
 
-% figure;
-% subplot(121)
-% imshow(grayImg);
-% subplot(122)
-% imshow(dogImg);
 end
