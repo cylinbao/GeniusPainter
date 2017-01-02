@@ -1,13 +1,30 @@
-function [strokes colorStrokes box boxEdge] = getStrokes(img,edge,cen,boxRange)
+function [strokes colorStrokes] = getStrokes(img,edge,cen,boxRange)
 switch nargin
 	case 3
 		boxRange = [50 50];
 end
 
-startX = cen(1)-boxRange(1); startY = cen(2)-boxRange(2);
-startPos(1) = startX; startPos(2) = startY;
-box = img(startX:startX+boxRange(1)*2-1,startY:startY+boxRange(2)*2-1,:);
-boxEdge = edge(startX:startX+boxRange(1)*2-1,startY:startY+boxRange(2)*2-1);
+[row col dep] = size(img);
+
+startRow = cen(1)-boxRange(1); startCol = cen(2)-boxRange(2);
+endRow = cen(1)+boxRange(1)-1; endCol = cen(2)+boxRange(2)-1;
+
+if startRow < 1
+    startRow = 1;
+end
+if endRow > row
+    endRow = row; 
+end
+if startCol < 1
+    startCol = 1;
+end
+if endCol > col
+    endCol = col; 
+end
+
+startPos = [startRow startCol];
+box = img(startRow:endRow,startCol:endCol,:);
+boxEdge = edge(startRow:endRow,startCol:endCol,:);
 
 CC = bwconncomp(boxEdge);
 
@@ -16,7 +33,7 @@ CC = bwconncomp(boxEdge);
 
 strokes = regionprops(CC,'Area','BoundingBox','Image');
 strokes = filterStrokes(strokes,10);
-colorStrokes = getColorStrokes(box,startPos,strokes);
+[strokes colorStrokes] = getColorStrokes(box,startPos,strokes);
 
 end
 

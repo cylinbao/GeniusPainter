@@ -1,6 +1,7 @@
 clear;
 
 cen = [480 720];
-style = imread('images/starry.jpg');
+style = imread('images/style_C.jpg');
 styleText = edgeDetect(style);
-[strokes colorStrokes box boxEdge] = getStrokes(style,styleText,cen);
+
+[strokes colorStrokes] = getStrokes(style,styleText,cen);
