@@ -1,7 +1,7 @@
 function [strokes colorStrokes] = getStrokes(img,edge,cen,boxRange)
 switch nargin
 	case 3
-		boxRange = [50 50];
+		boxRange = [10 10];
 end
 
 [row col dep] = size(img);
@@ -32,7 +32,7 @@ CC = bwconncomp(boxEdge);
 % [biggest,idx] = max(numPixels)
 
 strokes = regionprops(CC,'Area','BoundingBox','Image');
-strokes = filterStrokes(strokes,10);
+% strokes = filterStrokes(strokes,10);
 [strokes colorStrokes] = getColorStrokes(box,startPos,strokes);
 
 end

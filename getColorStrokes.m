@@ -1,6 +1,6 @@
 function [strokes colorStrokes] = getColorStrokes(box,startPos,strokes)
 
-numStrokes = size(strokes);
+numStrokes = size(strokes)
 
 for i = 1:numStrokes
     bBox = int32(strokes(i).BoundingBox);

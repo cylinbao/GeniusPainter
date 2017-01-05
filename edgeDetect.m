@@ -11,10 +11,9 @@ bImg = im2bw(dImg,th);
 % Enlarge image back to original size
 edge = imresize(bImg,[x y]);
 
-
-se = strel('disk',1);
-edge = imclose(edge,se);
-edge = imopen(edge,se);
-edge = imdilate(edge,se);
+% se = strel('disk',1);
+% edge = imclose(edge,se);
+% edge = imopen(edge,se);
+% edge = imdilate(edge,se);
 
 end
